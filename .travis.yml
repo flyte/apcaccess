@@ -1,0 +1,21 @@
+language: python
+python: 2.7
+env:
+  - TOX_ENV=py27
+  - TOX_ENV=py33
+  - TOX_ENV=py34
+  - TOX_ENV=flake8
+  - TOX_ENV=pylint
+install:
+  - pip install tox
+script:
+  - tox -e $TOX_ENV
+deploy:
+  provider: pypi
+  user: flyte
+  password:
+    secure: qjEChF1j3vRVC+hiZCreiBJV3OIxy5//7q1ES20qqHlDng2h+1FZ4efwJj7f8+cRo5szylN7c+luQmYy8FiMnmfbsuSZKtb3E8AjAYjSvlLJU2prtXXNwZCfbJzKZd3E6dyFouRrhhl9JLJDp2rBt513ddgb9ma1HGbzTadB1nRXXT+YgzO0tI0Qr/rwKQHD35uUcAgFjZk0v2vF8cO2wZJK8+CebL1CiXSo5Bp5aNhKSw7MIRWPKgIIMbiO4mXGIWHw/0L/1cG5g0B4UOjFJHjdT6wewLLo6R+TisVvdXZrZ4Y7cPFmCSKV2dGPorvumjbWZ8ZmQDGesuHcsv4zhL8+G53jvRvaR9hjlkjikENlMvxcso55xfxhdJhNfAI51m72j0zwKQxcBY9N+P1x/bZKzVYKRDVeyJNKvO7F7Uwzp4oaeUhduNEMFBSZoMF+r1pTGtH1cX5+Oflnp50MtEXZAihxB6kCzbTm/6+BZdhtiv0FHOLkkz23Iubz18Ev4gFcNP6RAQVLp1MbabPhQ1d6931cCbwuX9WVctvfOckbbz7LZ6ZGfowp9ijZcG5OXNr/9XcEFHhivZXUTUsVl7VjJBlpf5pKvCxjwt6nZ/PuG1VIcOnknWgNrxg40Zy92vjVV5oyM7o0Mv1e8xDXtGDCC1Vhqocbrkr2EdIspTM=
+  on:
+    tags: true
+    repo: flyte/apcaccess
+  distributions: "sdist"
