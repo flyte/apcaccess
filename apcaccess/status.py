@@ -14,6 +14,15 @@ CMD_STATUS = "\x00\x06status".encode()
 EOF = "  \n\x00\x00"
 SEP = ":"
 BUFFER_SIZE = 1024
+ALL_UNITS = (
+    " Minutes",
+    " Seconds",
+    " Percent",
+    " Volts",
+    " Watts",
+    " Hz",
+    " C",
+)
 
 
 def get(host="localhost", port=3551):
@@ -51,9 +60,23 @@ def parse(raw_status):
     return OrderedDict([[x.strip() for x in x.split(SEP, 1)] for x in lines])
 
 
-def print_status(raw_status):
+def strip_units_from_lines(lines):
+    """
+    Removes all units from the ends of the lines.
+    """
+    for line in lines:
+        for unit in ALL_UNITS:
+            if line.endswith(unit):
+                line = line[:-len(unit)]
+        yield line
+
+
+def print_status(raw_status, strip_units=False):
     """
     Print the status to stdout in the same format as the original apcaccess.
     """
-    for line in split(raw_status):
+    lines = split(raw_status)
+    if strip_units:
+        lines = strip_units_from_lines(lines)
+    for line in lines:
         print(line)
