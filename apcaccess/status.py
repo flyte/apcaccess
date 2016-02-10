@@ -10,7 +10,7 @@ import socket
 from collections import OrderedDict
 
 
-CMD_STATUS = "\x00\x06status"
+CMD_STATUS = "\x00\x06status".encode()
 EOF = "  \n\x00\x00"
 SEP = ":"
 BUFFER_SIZE = 1024
@@ -25,7 +25,7 @@ def get(host="localhost", port=3551):
     sock.send(CMD_STATUS)
     buffr = ""
     while not buffr.endswith(EOF):
-        buffr += sock.recv(BUFFER_SIZE)
+        buffr += sock.recv(BUFFER_SIZE).decode()
     sock.close()
     return buffr
 
