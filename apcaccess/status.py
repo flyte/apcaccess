@@ -25,11 +25,12 @@ ALL_UNITS = (
 )
 
 
-def get(host="localhost", port=3551):
+def get(host="localhost", port=3551, timeout=30):
     """
     Connect to the APCUPSd NIS and request its status.
     """
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(timeout)
     sock.connect((host, port))
     sock.send(CMD_STATUS)
     buffr = ""
