@@ -50,12 +50,14 @@ def split(raw_status):
     return [x[1:-1] for x in raw_status[:-len(EOF)].split("\x00") if x]
 
 
-def parse(raw_status):
+def parse(raw_status, strip_units=False):
     """
     Split the output from get_status() into lines, clean it up and return it as
     an OrderedDict.
     """
     lines = split(raw_status)
+    if strip_units:
+        lines = strip_units_from_lines(lines)
     # Split each line on the SEP character, strip extraneous whitespace and
     # create an OrderedDict out of the keys/values.
     return OrderedDict([[x.strip() for x in x.split(SEP, 1)] for x in lines])
