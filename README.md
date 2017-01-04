@@ -1,3 +1,5 @@
+![build status](https://travis-ci.org/flyte/apcaccess.svg?branch=develop)
+
 apcaccess
 =========
 
