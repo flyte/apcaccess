@@ -15,13 +15,13 @@ EOF = "  \n\x00\x00"
 SEP = ":"
 BUFFER_SIZE = 1024
 ALL_UNITS = (
-    " Minutes",
-    " Seconds",
-    " Percent",
-    " Volts",
-    " Watts",
-    " Hz",
-    " C",
+    "Minutes",
+    "Seconds",
+    "Percent",
+    "Volts",
+    "Watts",
+    "Hz",
+    "C",
 )
 
 
@@ -69,8 +69,8 @@ def strip_units_from_lines(lines):
     """
     for line in lines:
         for unit in ALL_UNITS:
-            if line.endswith(unit):
-                line = line[:-len(unit)]
+            if line.endswith(" %s" % unit):
+                line = line[:-1-len(unit)]
         yield line
 
 

@@ -95,12 +95,33 @@ def test_parse_removes_extraneous_whitespace():
         assert key.strip() == key
         assert value.strip() == value
 
+def test_parse_strips_units():
+    """
+    Should strip units from the values if requested.
+    """
+    parsed = status.parse(SAMPLE_STATUS, strip_units=True)
+    for value in parsed.values():
+        for unit in status.ALL_UNITS:
+            assert not value.endswith(unit)
+
+def test_parse_doesnt_strip_units():
+    """
+    Should not strip units from the values if not requested.
+    """
+    parsed = status.parse(SAMPLE_STATUS)
+    has_units = False
+    for value in parsed.values():
+        for unit in status.ALL_UNITS:
+            if value.endswith(unit):
+                has_units = True
+    assert has_units
+
 
 def test_strip_units_removes_units():
     """
     Should remove all units from the ends of the lines.
     """
-    lines = ["100%s" % x for x in status.ALL_UNITS]
+    lines = ["100 %s" % x for x in status.ALL_UNITS]
     lines.append("100")
     stripped = status.strip_units_from_lines(lines)
     assert all([x == "100" for x in stripped])
