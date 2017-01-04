@@ -9,7 +9,8 @@ import argparse
 from apcaccess import status
 
 
-if __name__ == "__main__":
+def main():
+    """Get status from APC NIS and print output on stdout."""
     # No need to use "proper" names on such simple code.
     # pylint: disable=invalid-name
     p = argparse.ArgumentParser()
@@ -21,3 +22,7 @@ if __name__ == "__main__":
         status.get(args.host, args.port),
         strip_units=args.strip_units
     )
+
+
+if __name__ == "__main__":
+    main()
