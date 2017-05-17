@@ -24,7 +24,7 @@ def required(fname):
 
 setup(
     name="apcaccess",
-    version="0.0.9",
+    version="0.0.10",
     packages=find_packages(
         exclude=[
             "*.tests",
