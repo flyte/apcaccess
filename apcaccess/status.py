@@ -20,6 +20,7 @@ ALL_UNITS = (
     "Percent",
     "Volts",
     "Watts",
+    "Amps",
     "Hz",
     "C",
 )
