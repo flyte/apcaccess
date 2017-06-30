@@ -23,6 +23,8 @@ ALL_UNITS = (
     "Amps",
     "Hz",
     "C",
+    "VA",
+    "Percent Load Capacity"
 )
 
 
